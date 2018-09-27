@@ -63,6 +63,12 @@ myCircle.anchorY = 0
 myCircle.X = 30
 myCircle.Y = 30
 
+
+
+
+
+
+
 -- set the width of the border
 myCircleStrokeWidth = 20
 
