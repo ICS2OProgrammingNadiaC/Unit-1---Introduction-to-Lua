@@ -35,50 +35,27 @@ end
 -- MoveShip will be called over and over again
 Runtime:addEventListener("enterFrame", MoveShip)	
 
-
-
-
-
-
-
-
-
-
-
--- global variables
-scrollSpeed = 3
-
 -- character image with width and height 
-local beetl0.0..
-
-
-
-
-
-
-
-
-
-
-
-eship = display.newImageRect("Images/beetleship.png", 200, 200)
+local rocketship = display.newImageRect("Images/rocketship.png", 200, 200)
 
 -- set the image to be transparent
-beetleship.alpha = 0
+rocketship.alpha = 0
 
 -- set the initial x and y position of beetleship
-beetleship.x = 0
-beetleship.y = display.contentHeight/3
+rocketship.x = 0
+rocketship.y = display.contentHeight/3
 
 -- Funtion: MoveShip
 -- Input: this function accepts an event listener
 -- Output: none
 -- Description: This function adds the scroll speed to the x-value of the ship
-local function MoveShip(event)
+local function MoveRocket(event)
 	-- add the scroll speed to the x-value of the ship
-	beetleship.x = beetleship.x + scrollSpeed
+	rocketship.x = rocketship.x + scrollSpeed
 	-- change the transparency of the ship every time it moves so that it fades out
-	beetleship.alpha = beetleship.alpha + 0.01
+	rocketship.alpha = rocketship.alpha + 0.01
 end
+
 -- MoveShip will be called over and over again
-Runtime:addEventListener("enterFrame", MoveShip)	
+Runtime:addEventListener("enterFrame", MoveRocket)	
+
