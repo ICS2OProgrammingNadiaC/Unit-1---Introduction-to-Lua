@@ -22,6 +22,11 @@ beetleship.alpha = 0
 beetleship.x = 0
 beetleship.y = display.contentHeight/3
 
+
+
+
+
+
 -- Funtion: MoveShip
 -- Input: this function accepts an event listener
 -- Output: none
@@ -32,6 +37,9 @@ local function MoveShip(event)
 	-- change the transparency of the ship every time it moves so that it fades out
 	beetleship.alpha = beetleship.alpha + 0.01
 end
+
+
+
 -- MoveShip will be called over and over again
 Runtime:addEventListener("enterFrame", MoveShip)	
 
@@ -43,7 +51,7 @@ rocketship.alpha = 0
 
 -- set the initial x and y position of beetleship
 rocketship.x = 0
-rocketship.y = display.contentHeight/3
+rocketship.y = display.contentHeight/7
 
 -- Funtion: MoveShip
 -- Input: this function accepts an event listener
