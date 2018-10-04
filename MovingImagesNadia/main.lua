@@ -47,10 +47,12 @@ Runtime:addEventListener("enterFrame", MoveShip)
 local rocketship = display.newImageRect("Images/rocketship.png", 200, 200)
 
 -- set the image to be transparent
-rocketship.alpha = 0
+rocketship.alpha = 1
+
+rocketship.xScale = -1 
 
 -- set the initial x and y position of beetleship
-rocketship.x = 0
+rocketship.x = 1000
 rocketship.y = display.contentHeight/7
 
 -- Funtion: MoveShip
@@ -59,11 +61,10 @@ rocketship.y = display.contentHeight/7
 -- Description: This function adds the scroll speed to the x-value of the ship
 local function MoveRocket(event)
 	-- add the scroll speed to the x-value of the ship
-	rocketship.x = rocketship.x + scrollSpeed
+	rocketship.x = rocketship.x - scrollSpeed
 	-- change the transparency of the ship every time it moves so that it fades out
-	rocketship.alpha = rocketship.alpha + 0.01
+	rocketship.alpha = rocketship.alpha - 0.001
 end
 
 -- MoveShip will be called over and over again
-Runtime:addEventListener("enterFrame", MoveRocket)	
-
+Runtime:addEventListener("enterFrame", MoveRocket)
