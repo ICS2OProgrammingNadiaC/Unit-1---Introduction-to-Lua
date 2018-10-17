@@ -32,12 +32,20 @@ local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
 	randomNumber1 = math.random(0, 10)
 	randomNumber2 = math.random(0, 10)
+	randomOperator = math.random(1, 3)
 
-	correctAnswer = randomNumber1 + randomNumber2
+		if (randomOperator == 1) then
+			correctAnswer = randomNumber1 * randomNumber2
+
+		elseif (randomOperator == 2) then
+			correctAnswer = randomNumber1 + randomNumber2
+
+ 		elseif (randomOperator == 3) then
+ 			correctAnswer = randomNumber1 - randomNumber2
+		end
 
 	-- create question in text object
 	questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
-
 end
 
 local function HideCorrect()
