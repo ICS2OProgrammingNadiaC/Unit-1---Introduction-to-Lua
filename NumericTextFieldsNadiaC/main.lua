@@ -22,6 +22,8 @@ local numericField
 local randomNumber1
 local randomNumber2
 local userAnswer 
+local userAnswer
+local numberPoints = 0
 local correctAnswer
 
 -------------------------------------------------------------------------------------
@@ -36,6 +38,7 @@ local function AskQuestion()
 	randomNumber1 = math.random(10, 20)
 	randomNumber2 = math.random(10, 20)
 	randomOperator = math.random(1, 3)
+
 
 	if (randomOperator == 1) then
 		correctAnswer = randomNumber1 * randomNumber2
@@ -52,6 +55,24 @@ local function AskQuestion()
  		-- create question in text object
  		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
 	end
+
+		if (randomOperator == 1) then
+			correctAnswer = randomNumber1 * randomNumber2
+			-- create question in text object
+			questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
+
+
+		elseif (randomOperator == 2) then
+			correctAnswer = randomNumber1 + randomNumber2
+			-- create question in text object
+			questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
+
+ 		elseif (randomOperator == 3) then
+ 			correctAnswer = randomNumber1 - randomNumber2
+ 			-- create question in text object
+			questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
+		end
+
 end
 
 local function HideCorrect()
@@ -68,7 +89,7 @@ function removeObject(userAnswer)
 	if ( incorrectObject.isVisible == false ) then
 		display.remove( userAnswer )
 		userAnswer = nil
-	else ( correctObject.isVisable = false ) then
+	else ( correctObject.isVisable == false ) then
 		display.remove( userAnswer )
 		userAnswer = nil 
 	end
@@ -90,9 +111,15 @@ local function NumericFieldListener( event )
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			timer.performWithDelay(2500, HideCorrect)
+		    numberPoints = numberPoints + 1
+			timer.performWithDelay(2000, HideCorrect)
+			correct.text = ( "Correct = " .. numberPoints)
+
 		else incorrectObject.isVisible = true
 			timer.performWithDelay(2500, HideIncorrect)
 		end
+		-- clear text field
+		event.target.text = ""
 	end
 end
 
@@ -125,6 +152,13 @@ numericField.inputType = "number"
 
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )
+
+-- display the correctAnswerText
+correct = display.newText( "" , 120, 100, nil, 50 )
+correct:setTextColor(123/255, 200/255, 100/255)
+correct.text = ( "Correct =" .. numberPoints)
+
+
 
 -----------------------------------------------------------------------------------
 -- FUNCTION CALLS
