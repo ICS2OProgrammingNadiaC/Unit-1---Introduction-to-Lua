@@ -38,27 +38,10 @@ local function AskQuestion()
 	randomOperator = math.random(1, 3)
 
 
-	if (randomOperator == 1) then
-		correctAnswer = randomNumber1 * randomNumber2
-		-- create question in text object
-		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
-
-	elseif (randomOperator == 2) then
-		correctAnswer = randomNumber1 + randomNumber2
-		-- create question in text object
-		questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
-
- 	elseif (randomOperator == 3) then
- 		correctAnswer = randomNumber1 - randomNumber2
- 		-- create question in text object
- 		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
-	end
-
 		if (randomOperator == 1) then
 			correctAnswer = randomNumber1 * randomNumber2
 			-- create question in text object
 			questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
-
 
 		elseif (randomOperator == 2) then
 			correctAnswer = randomNumber1 + randomNumber2
@@ -68,9 +51,8 @@ local function AskQuestion()
  		elseif (randomOperator == 3) then
  			correctAnswer = randomNumber1 - randomNumber2
  			-- create question in text object
-			questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
-		end
-
+ 			questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
+	end
 end
 
 local function HideCorrect()
@@ -99,10 +81,9 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
-			timer.performWithDelay(2500, HideCorrect)
 		    numberPoints = numberPoints + 1
+		    correct.text = ( "Correct = " .. numberPoints)
 			timer.performWithDelay(2000, HideCorrect)
-			correct.text = ( "Correct = " .. numberPoints)
 
 		else incorrectObject.isVisible = true
 			timer.performWithDelay(2500, HideIncorrect)
