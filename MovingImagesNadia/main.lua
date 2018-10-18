@@ -68,3 +68,12 @@ end
 
 -- MoveShip will be called over and over again
 Runtime:addEventListener("enterFrame", MoveRocket)
+---------------------------------------------------------------------
+-- SOUNDS
+---------------------------------------------------------------------
+
+-- electronic sound
+local electronicsSound = audio.loadSound( "Sounds/electronics.mp3")
+local electronicsSoundChannel
+
+electronicsSoundChannel = audio.play(electronicsSound)

@@ -31,14 +31,6 @@ textObject:setTextColor(155/255, 42/255, 198/255)
 --------------------------------------------------------------------------------------------
 
 -- Cricket sound
-local cricketSound = audio.loadSound( "Sounds/cricket.mp3" )
-local cricketSoundChannel
-
--- begin to play the music
-cricketSoundChannel = audio.play(cricketSoundMusic)
-
-
--- Correct sound
 local cricketsSound = audio.loadSound( "Sounds/crickets.mp3" )
 local cricketsSoundChannel
-cricketSoundChannel = audio.play(cricketSound)
+cricketsSoundChannel = audio.play(cricketsSound)

@@ -95,7 +95,7 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
-correctSoundChannel = audio.play(correctSound)
+			correctSoundChannel = audio.play(correctSound)
 			
 
 		    numberPoints = numberPoints + 1
