@@ -14,17 +14,29 @@ display.setDefault("background", 124/255, 230/255, 219/255)
 -- LOCAL VARIABLES
 -------------------------------------------------------------------------------------
 
--- creat local variables
+-- create local variables
 local questionObject
 local correctObject
 local incorrectObject
 local numericField
-local randomNumber1 
-local randomNumber2
+local randomNumber1
+local randomNumber2 
 local userAnswer 
 local userAnswer
 local numberPoints = 0
 local correctAnswer
+
+-----------------------------------------------------------------------------------
+-- SOUNDS
+-----------------------------------------------------------------------------------
+
+-- Correct sound
+local correctSound = audio.loadSound( "Sounds/correctSound.mp3" )
+local correctSoundChannel
+
+-- Incorrect Sounds
+local incorrectSound = audio.loadSound( "Sounds/incorrectSound.mp3" )
+local incorrectSoundChannel
 
 -------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -34,7 +46,9 @@ local correctAnswer
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
 	randomNumber1 = math.random(10, 20)
+	-- set randomNumber2
 	randomNumber2 = math.random(10, 20)
+	-- set randomOperator
 	randomOperator = math.random(1, 3)
 
 
@@ -81,12 +95,18 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
+
+			correctSoundChannel = audio.play(correctSound)
+
 		    numberPoints = numberPoints + 1
 		    correct.text = ( "Correct = " .. numberPoints)
 			timer.performWithDelay(2000, HideCorrect)
 
 		else incorrectObject.isVisible = true
-			timer.performWithDelay(2500, HideIncorrect)
+
+			incorrectSoundChannel = audio.play(incorrectSound)
+			
+			timer.performWithDelay(2000, HideIncorrect)
 		end
 		-- clear text field
 		event.target.text = ""
