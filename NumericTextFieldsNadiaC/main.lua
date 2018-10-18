@@ -19,7 +19,7 @@ local questionObject
 local correctObject
 local incorrectObject
 local numericField
-local randomNumber1
+local randomNumber1 
 local randomNumber2
 local userAnswer 
 local userAnswer
@@ -29,8 +29,6 @@ local correctAnswer
 -------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -------------------------------------------------------------------------------------
-
-
 
 
 local function AskQuestion()
@@ -85,15 +83,6 @@ local function HideIncorrect()
 	AskQuestion()
 end
 
-function removeObject(userAnswer)
-	if ( incorrectObject.isVisible == false ) then
-		display.remove( userAnswer )
-		userAnswer = nil
-	else ( correctObject.isVisable == false ) then
-		display.remove( userAnswer )
-		userAnswer = nil 
-	end
-end
 
 local function NumericFieldListener( event )
 
