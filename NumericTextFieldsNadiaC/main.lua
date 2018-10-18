@@ -37,16 +37,21 @@ local function AskQuestion()
 
 		if (randomOperator == 1) then
 			correctAnswer = randomNumber1 * randomNumber2
+			-- create question in text object
+			questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
+
 
 		elseif (randomOperator == 2) then
 			correctAnswer = randomNumber1 + randomNumber2
+			-- create question in text object
+			questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
 
  		elseif (randomOperator == 3) then
  			correctAnswer = randomNumber1 - randomNumber2
+ 			-- create question in text object
+			questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
 		end
 
-	-- create question in text object
-	questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
 end
 
 local function HideCorrect()
