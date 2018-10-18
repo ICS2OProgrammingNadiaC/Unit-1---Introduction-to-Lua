@@ -22,6 +22,7 @@ local numericField
 local randomNumber1
 local randomNumber2
 local userAnswer
+local numberPoints = 0
 local correctAnswer
 
 -------------------------------------------------------------------------------------
@@ -73,12 +74,18 @@ local function NumericFieldListener( event )
 		-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
+		    numberPoints = numberPoints + 1
 			timer.performWithDelay(2000, HideCorrect)
+			correct.text = ( "Correct = " .. numberPoints)
 		else incorrectObject.isVisible = true
 			timer.performWithDelay(2000, HideIncorrect)
 		end
+		-- clear text field
+		event.target.text = ""
 	end
 end
+
+
 
 ------------------------------------------------------------------------------------
 -- OBJECT CREATION
@@ -103,6 +110,13 @@ numericField.inputType = "number"
 
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )
+
+-- display the correctAnswerText
+correct = display.newText( "" , 120, 100, nil, 50 )
+correct:setTextColor(123/255, 200/255, 100/255)
+correct.text = ( "Correct =" .. numberPoints)
+
+
 
 -----------------------------------------------------------------------------------
 -- FUNCTION CALLS
