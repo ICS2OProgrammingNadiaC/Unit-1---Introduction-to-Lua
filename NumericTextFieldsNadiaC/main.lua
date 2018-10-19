@@ -96,8 +96,6 @@ local function NumericFieldListener( event )
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
 			correctSoundChannel = audio.play(correctSound)
-			
-
 		    numberPoints = numberPoints + 1
 		    correct.text = ( "Correct = " .. numberPoints)
 			timer.performWithDelay(2000, HideCorrect)

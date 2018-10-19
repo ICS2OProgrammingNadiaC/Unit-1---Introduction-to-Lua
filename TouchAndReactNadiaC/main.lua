@@ -9,6 +9,14 @@ display.setDefault ("background", 12/255, 99/255, 1/255)
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
+----------------------------------------------------------------
+-- SOUNDS
+----------------------------------------------------------------
+
+local bellSound = audio.loadSound( "Sounds/bell.mp3" )
+local bellSoundChannel
+
+
 -- create blue button, set its position and make it visable
 local blueButton = display.newImageRect("Images/Fast Button Inactive@2x.png",198, 96)
 blueButton.x = display.contentWidth/2
@@ -38,6 +46,7 @@ local function BlueButtonListener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		bellsSoundChannel = audio.play(bellSound)
 	end
 
 	if (touch.phase == "ended") then
