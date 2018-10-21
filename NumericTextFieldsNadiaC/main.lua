@@ -26,18 +26,34 @@ local numberPoints = 0
 local correctAnswer
 
 -------------------------------------------------------------------------------------
+-- SOUNDS
+-------------------------------------------------------------------------------------
+
+-- Correct Sound
+local correctSound = audio.loadSound( "Sounds/correctSound.mp3" )
+local correctSoundChannel
+
+-- Incorrect Sound
+local incorrectSound = audio.loadSound( "Sounds/incorrectSound.mp3" )
+
+
+-------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -------------------------------------------------------------------------------------
 
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
+	-- set random number 1
 	randomNumber1 = math.random(0, 10)
+	-- set random number 2
 	randomNumber2 = math.random(0, 10)
+	-- set random operators
 	randomOperator = math.random(1, 3)
 
 	if (randomOperator == 1) then
 		correctAnswer = randomNumber1 * randomNumber2
 		-- create question in text object
+		questionObject.text = randomNumber1 .. " * " .. randomNumber2 .. " = "
 
 	elseif (randomOperator == 2) then
 		correctAnswer = randomNumber1 + randomNumber2
@@ -48,8 +64,7 @@ local function AskQuestion()
  		correctAnswer = randomNumber1 - randomNumber2
  		-- create question in text object
 		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
-	end
-	
+	end	
 end
 
 local function HideCorrect()
@@ -71,13 +86,13 @@ local function NumericFieldListener( event )
 		event.target.text = ""
 
 	elseif event.phase == "submitted" then
-		-- when the answer is submitted (enter key is pressed) set user's input to user's answer
-		userAnswer = tonumber(event.target.text)
+			-- when the answer is submitted (enter key is pressed) set user's input to user's answer
+			userAnswer = tonumber(event.target.text)
 
-		-- if the users answer and the correct answers are the same:
+			-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
 			correctObject.isVisible = true
-		    numberPoints = numberPoints + 1
+			numberPoints = numberPoints + 1
 			timer.performWithDelay(2000, HideCorrect)
 			correct.text = ( "Correct = " .. numberPoints)
 		else incorrectObject.isVisible = true
