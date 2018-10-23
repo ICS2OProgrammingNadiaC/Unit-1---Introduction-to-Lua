@@ -24,6 +24,27 @@ local randomNumber2
 local userAnswer
 local numberPoints = 0
 local correctAnswer
+local correctObject
+
+-- variables for the timer
+local totalSeconds = 10
+local secondsLeft = 10
+local clockText
+
+local lives = 4
+local heart1
+local heart2
+local heart3
+local heart4
+
+-- local variables for the incorrect object, correct object, points object, points
+local incorrectObject
+local correctObject
+local pointsObject
+local points
+
+local gameOver
+local countDownTimer
 
 -------------------------------------------------------------------------------------
 -- SOUNDS
@@ -35,7 +56,7 @@ local correctSoundChannel
 
 -- Incorrect Sound
 local incorrectSound = audio.loadSound( "Sounds/incorrectSound.mp3" )
-
+local incorrectSoundChannel
 
 -------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -77,15 +98,14 @@ local function HideIncorrect()
 	AskQuestion()
 end
 
-local function NumericFieldListener( event )
+local function NumericFieldListener(event)
 
 	-- User begins editing "numericField"
 	if ( event.phase == "began" ) then
-
 		-- clear text field
 		event.target.text = ""
-
-	elseif event.phase == "submitted" then
+	
+	elseif (event.phase == "submitted") then
 			-- when the answer is submitted (enter key is pressed) set user's input to user's answer
 			userAnswer = tonumber(event.target.text)
 
@@ -106,63 +126,6 @@ local function NumericFieldListener( event )
 end
 
 
-
-------------------------------------------------------------------------------------
--- OBJECT CREATION
-------------------------------------------------------------------------------------
-
--- displays a question and sets it colour
-questionObject = display.newText( "", display.contentWidth/3, display.contentHeight/2, nil, 50 )
-questionObject:setTextColor(130/255, 200/255, 3/255)
-
--- create the correct text object and make it invisable
-correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
-correctObject:setTextColor(130/255, 30/255, 243/255)
-correctObject.isVisible = false
-
--- create the incorrect text object and make it invisable
-incorrectObject = display.newText( "Incorrect, try again!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
-incorrectObject:setTextColor(190/255, 20/255, 200/255)
-incorrectObject.isVisible = false
--- create numeric field
-numericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80 )
-numericField.inputType = "default"
-
--- add the event listener for the numeric field
-numericField:addEventListener( "userInput", NumericFieldListener )
-
--- display the correctAnswerText
-correct = display.newText( "" , 120, 100, nil, 50 )
-correct:setTextColor(123/255, 200/255, 100/255)
-correct.text = ( "Correct =" .. numberPoints)
-
-
-
-
-
-
--- variables for the timer
-local totalSeconds = 10
-local secondsLeft = 10
-local clockText
-local countDownTimer
-
-local lives = 4
-local heart1
-local heart2
-local heart3
-local heart4
-
--- local variables for the incorrect object, correct object, points object, points
-local incorrectObject
-local correctObject
-local pointsObject
-local points
-
-local gameOver
-local countDownTimer
-
-
 ---------------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 ---------------------------------------------------------------------------------------------
@@ -179,14 +142,17 @@ local function UpdateTime()
 		secondsLeft = totalSeconds
 		lives = lives - 1
 		-- if there are no lives left, play a lose sound and display a lose image.
+		incorrectSoundChannel = audio.play(incorrectSound)
+		gameOverImage.isVisible = true
 		-- cancel the timer and remove the fourth heart by making it invisible
-		if (lives == 3) then
+		if (lives == 4) then
+			heart4.isVisible = false
+		elseif (lives == 3) then
 			heart3.isVisible = false
 		elseif (lives == 2) then
 			heart2.isVisible = false
 		elseif (lives == 1) then
 			heart1.isVisable = false
-
 		end
 		-- call the function to ask a new question
 		AskQuestion()
@@ -202,7 +168,13 @@ local function GameOver(event)
 		gameOver = display.newImageRect("Images/gameOver.png")
 	end
 end
+
 -- create a function to call the timer
+local function callCountDownTimer()
+	--create the inifinate timer
+	countDownTimer = timer.preformWithDelay( 1000, updateTime, 0)
+end
+
 local function StartCountDownTimer()
 	-- create an infinate timer
 	countDownTimer = timer.performWithDelay( 1000, updateTime, 0)
@@ -238,6 +210,33 @@ heart4.y = display.contentHeight * 1 / 7
 countDownTimer = display.newText( "" , 135, 155, nil, 35 )
 countDownTimer:setTextColor(123/255, 200/255, 100/255)
 countDownTimer.text = ( "Countdown =  " .. secondsLeft)
+
+
+-- displays a question and sets it colour
+questionObject = display.newText( "", display.contentWidth/3, display.contentHeight/2, nil, 50 )
+questionObject:setTextColor(130/255, 200/255, 3/255)
+
+-- create the correct text object and make it invisable
+correctObject = display.newText( "Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+correctObject:setTextColor(130/255, 30/255, 243/255)
+correctObject.isVisible = false
+
+-- create the incorrect text object and make it invisable
+incorrectObject = display.newText( "Incorrect, try again!", display.contentWidth/2, display.contentHeight*2/3, nil, 50 )
+incorrectObject:setTextColor(190/255, 20/255, 200/255)
+incorrectObject.isVisible = false
+-- create numeric field
+numericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80 )
+numericField.inputType = "default"
+
+-- add the event listener for the numeric field
+numericField:addEventListener( "userInput", NumericFieldListener )
+
+-- display the correctAnswerText
+correct = display.newText( "" , 120, 100, nil, 50 )
+correct:setTextColor(123/255, 200/255, 100/255)
+correct.text = ( "Correct =" .. numberPoints)
+
 
 
 
