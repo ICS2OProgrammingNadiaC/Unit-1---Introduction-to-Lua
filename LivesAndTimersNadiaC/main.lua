@@ -94,9 +94,11 @@ local function NumericFieldListener( event )
 			correctObject.isVisible = true
 			numberPoints = numberPoints + 1
 			timer.performWithDelay(2000, HideCorrect)
+			correctSoundChannel = audio.play(correctSound)
 			correct.text = ( "Correct = " .. numberPoints)
 		else incorrectObject.isVisible = true
 			timer.performWithDelay(2000, HideIncorrect)
+			incorrectSoundChannel = audio.play(incorrectSound)
 		end
 		-- clear text field
 		event.target.text = ""
@@ -136,15 +138,6 @@ correct.text = ( "Correct =" .. numberPoints)
 
 
 
------------------------------------------------------------------------------------
--- FUNCTION CALLS
------------------------------------------------------------------------------------
-
--- call the function to ask the question
-AskQuestion()
-
-
-
 
 
 
@@ -167,6 +160,7 @@ local pointsObject
 local points
 
 local gameOver
+local countDownTimer
 
 
 ---------------------------------------------------------------------------------------------
@@ -209,7 +203,7 @@ local function GameOver(event)
 	end
 end
 -- create a function to call the timer
-local function startTimer()
+local function StartCountDownTimer()
 	-- create an infinate timer
 	countDownTimer = timer.performWithDelay( 1000, updateTime, 0)
 end
@@ -239,4 +233,18 @@ heart4.x = display.contentWidth * 4 / 8
 heart4.y = display.contentHeight * 1 / 7
 
 
+-- display the countDownTimer
 
+countDownTimer = display.newText( "" , 135, 155, nil, 35 )
+countDownTimer:setTextColor(123/255, 200/255, 100/255)
+countDownTimer.text = ( "Countdown =  " .. secondsLeft)
+
+
+
+-----------------------------------------------------------------------------------
+-- FUNCTION CALLS
+-----------------------------------------------------------------------------------
+
+-- call the function to ask the question
+AskQuestion()
+StartCountDownTimer()
