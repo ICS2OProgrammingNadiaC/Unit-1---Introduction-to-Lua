@@ -106,15 +106,37 @@ local function UpdateTime()
 	
 		-- udpate the hearts
 		if (lives == 4) then
-			heart4.isVisible = false
+			heart4.isVisible = true
+			heart3.isVisible = true
+			heart2.isVisible = true
+			heart1.isVisible = true
 		elseif (lives == 3) then
-			heart3.isVisible = false
+			heart4.isVisible = false
+			heart3.isVisible = true
+			heart2.isVisible = true
+			heart1.isVisible = true
 		elseif (lives == 2) then
+			heart4.isVisible = true
+			heart3.isVisible = true
 			heart2.isVisible = false
-		elseif (lives == 1) then
 			heart1.isVisible = false
+		elseif (lives == 1) then
+			heart4.isVisible = true
+			heart3.isVisible = false
+			heart2.isVisible = false
+			heart1.isVisible = false
+			
+		elseif 
+			(lives == 0) then
+			heart4.isVisible = false
+			heart3.isVisible = false
+			heart2.isVisible = false
+			heart1.isVisible = false
+			
+			
+			
+		
 		end
-	
 		-- call the function to ask a new question
 		AskQuestion()
 	end
