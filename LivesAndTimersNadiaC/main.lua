@@ -46,6 +46,7 @@ local heart2
 local heart3
 local heart4
 
+
 -------------------------------------------------------------------------------------
 -- SOUNDS
 -------------------------------------------------------------------------------------
@@ -111,10 +112,10 @@ local function UpdateTime()
 			heart2.isVisible = true
 			heart1.isVisible = true
 		elseif (lives == 3) then
-			heart4.isVisible = false
+			heart4.isVisible = true
 			heart3.isVisible = true
 			heart2.isVisible = true
-			heart1.isVisible = true
+			heart1.isVisible = false
 		elseif (lives == 2) then
 			heart4.isVisible = true
 			heart3.isVisible = true
@@ -125,21 +126,28 @@ local function UpdateTime()
 			heart3.isVisible = false
 			heart2.isVisible = false
 			heart1.isVisible = false
-			
 		elseif 
 			(lives == 0) then
 			heart4.isVisible = false
 			heart3.isVisible = false
 			heart2.isVisible = false
 			heart1.isVisible = false
-			
-			
-			
-		
+			display.newImageRect( "Images/gameOver.png" )
+			timer.cancel( countDownTimer )
+			countDownTimer = timer.preformWIthDelay( 1000, nil, 0)
 		end
 		-- call the function to ask a new question
 		AskQuestion()
 	end
+end
+
+local function ResetHearts()
+	if ( lives == 0 ) then
+        heart1.isVisible = true
+        heart2.isVisible = true
+        heart3.isVisible = true
+        heart4.isVisible = true
+    end
 end
 
 
