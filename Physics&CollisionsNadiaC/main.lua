@@ -19,3 +19,10 @@ physics.start()
 -- Ground
 local ground = display.newImage("Images/ground.png", 0, 0)
 
+ground.x = display.contentWidth/2
+ground.y = display.contentHeight
+-- change the width of the ground to be the same as the screen
+ground.width = display.contentWidth
+
+
+
