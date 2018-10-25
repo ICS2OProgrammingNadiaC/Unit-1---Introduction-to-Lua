@@ -45,6 +45,7 @@ local heart1
 local heart2
 local heart3
 local heart4
+local NumericTextField
 
 
 -------------------------------------------------------------------------------------
@@ -62,36 +63,6 @@ local incorrectSoundChannel
 -------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -------------------------------------------------------------------------------------
-local function DecreaseLives()
-	-- remove a heart every time the timer runs out
-	if (lives == 4) then
-		heart4.isVisible = false
-		-- remove one heart when the lives is 3
-	elseif (lives == 3) then
-		heart3.isVisible = false
-		-- remove another heart if lives is 2
-	elseif (lives == 2) then
-		heart2.isVisible = false
-		-- remove another heart if lives is 1
-	elseif (lives == 1) then
-		heart1.isVisible = false
-		gameOver.isVisible = true
-		numericField.isVisible = false	
-	
-
-	elseif (lives == 0) then
-		heart4.isVisible = false
-		heart3.isVisible = false
-		heart2.isVisible = false
-		heart1.isVisible = false
-		lives = lives - 1
-		DecreaseLives()
-		gameOver.isVisible = true
-		numericField.isVisible = false	
-	
-	end
-end
-
 -- ask questions on a constant repeat/ create endless questions in a local functions
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
@@ -119,6 +90,46 @@ local function AskQuestion()
 	end	
 end
 
+local function HideIncorrect()
+	-- hide the incorrect if the answer is correct
+	incorrectObject.isVisible = false
+	AskQuestion()
+end
+
+local function HideCorrect()
+	-- hide the correct if the answer is incorrect
+	correctObject.isVisible = false
+	AskQuestion()
+end
+
+
+
+local function DecreaseLives()
+	-- remove a heart every time the timer runs out
+	if (lives == 4) then
+
+		heart4.isVisible = false
+
+		-- remove one heart when the lives is 3
+	elseif (lives == 3) then
+
+		heart3.isVisible = false
+
+		-- remove another heart if lives is 2
+	elseif (lives == 2) then
+
+		heart2.isVisible = false
+
+		-- remove another heart if lives is 1
+	elseif (lives == 1) then
+
+		heart1.isVisible = false
+		gameOver.isVisible = true
+		numericField.isVisible = false	
+	end
+	lives = lives - 1
+end
+
 local function UpdateTime()
 	-- decrease the number of seconds
 	secondsLeft = secondsLeft - 1
@@ -132,80 +143,20 @@ local function UpdateTime()
 		lives = lives - 1
 		-- if there are no lives left, play a lose sound and display a lose image.
 		incorrectSoundChannel = audio.play(incorrectSound)
-		--gameOverImage.isVisible = true
-
+		gameOver.isVisible = true
+		numericField.isVisible = false
 		-- cancel the timer and remove the fourth heart by making it invisible
-	
-<<<<<<< HEAD
-		-- udpate the hearts
-		if (lives == 4) then
-			heart4.isVisible = true
-			heart3.isVisible = true
-			heart2.isVisible = true
-			heart1.isVisible = true
-		elseif (lives == 3) then
-			heart4.isVisible = true
-			heart3.isVisible = true
-			heart2.isVisible = true
-			heart1.isVisible = false
-		elseif (lives == 2) then
-			heart4.isVisible = true
-			heart3.isVisible = true
-			heart2.isVisible = false
-			heart1.isVisible = false
-		elseif (lives == 1) then
-			heart4.isVisible = true
-			heart3.isVisible = false
-			heart2.isVisible = false
-			heart1.isVisible = false
-		elseif 
-			(lives == 0) then
-			heart4.isVisible = false
-			heart3.isVisible = false
-			heart2.isVisible = false
-			heart1.isVisible = false
-			display.newImageRect( "Images/gameOver.png" )
-			timer.cancel( countDownTimer )
-			countDownTimer = timer.preformWIthDelay( 1000, nil, 0)
-		end
-=======
+		-- update the hearts
 		DecreaseLives()
->>>>>>> 17d0f75dd73b2c880976695076eb84c47c82935f
 		-- call the function to ask a new question
 		AskQuestion()
+
 	end
 end
 
-local function ResetHearts()
-	if ( lives == 0 ) then
-        heart1.isVisible = true
-        heart2.isVisible = true
-        heart3.isVisible = true
-        heart4.isVisible = true
-    end
-end
 
 
-local function StartTimer()
-	-- create an infinate timer
-	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
-end
-
-
-
-
-local function HideCorrect()
-	-- hide the correct if the answer is incorrect
-	correctObject.isVisible = false
-	AskQuestion()
-end
-
-local function HideIncorrect()
-	-- hide the incorrect if the answer is correct
-	incorrectObject.isVisible = false
-	AskQuestion()
-end
-
+-- create a function that asks the user a question constantly
 local function NumericFieldListener(event)
 
 	-- User begins editing "numericField"
@@ -220,45 +171,44 @@ local function NumericFieldListener(event)
 
 		-- if the users answer and the correct answers are the same:
 		if (userAnswer == correctAnswer) then
-
 			correctObject.isVisible = true
+			correctSoundChannel = audio.play(correctSound)
+			timer.performWithDelay( 2000, HideCorrect )	
 			numberPoints = numberPoints + 1
 			pointsObject.text = ( "Points = " .. numberPoints)
-			correctSoundChannel = audio.play(correctSound)
-			timer.performWithDelay(2000, HideCorrect)	
-		-- if the answer is incorrect
+			secondsLeft = totalSeconds
+			UpdateTime()
+
+		
+			-- if the answer is incorrect
 		else 
 			--play an incorrect sound
-			incorrectSoundChannel = audio.play(incorrectSound)
-			timer.performWithDelay(2000, HideIncorrect)
-
 			-- display incorrect text
-			incorrectObject.isVisible = true
+			incorrectObject.isVisible = true			
+			incorrectSoundChannel = audio.play(incorrectSound)
+			timer.performWithDelay( 2000, HideIncorrect )
 			
 			-- remove a life if the users answer is incorrect
-			lives = lives - 1
-			if (lives == 4) then
-				heart4.isVisible = false
-			elseif (lives == 3) then
-				heart3.isVisible = false
-			elseif (lives == 2) then
-				heart2.isVisible = false
-			elseif (lives == 1) then
-				heart1.isVisible = false
+			DecreaseLives()
+			secondsLeft = totalSeconds
+			UpdateTime()
 			
-			elseif (lives == 0) then
-				heart4.isVisible = false
-				heart3.isVisible = false
-				heart2.isVisible = false
-				heart1.isVisible = false
-				gameOver.isVisible = true
-				numericTextField.isVisible = false
-			end
 		end
 		-- clear text field
 		event.target.text = ""
 	end
 end
+
+
+
+local function StartTimer()
+	-- create an infinate timer
+	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
+end
+
+
+
+
 
 
 
@@ -302,7 +252,6 @@ incorrectObject.isVisible = false
 -- create numeric field
 numericField = native.newTextField( display.contentWidth/2, display.contentHeight/2, 150, 80 )
 numericField.inputType = "default"
-
 -- add the event listener for the numeric field
 numericField:addEventListener( "userInput", NumericFieldListener )
 
@@ -328,3 +277,5 @@ gameOver.isVisible = false
 AskQuestion()
 
 StartTimer()
+
+DecreaseLives()
