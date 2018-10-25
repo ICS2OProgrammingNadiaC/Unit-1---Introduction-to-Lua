@@ -39,7 +39,7 @@ local clockText
 
 local countDownTimer
 
-local lives = 4
+local lives = 5
 
 local heart1
 local heart2
@@ -62,6 +62,37 @@ local incorrectSoundChannel
 -------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -------------------------------------------------------------------------------------
+local function DecreaseLives()
+	-- remove a heart every time the timer runs out
+	if (lives == 4) then
+		heart4.isVisible = false
+		-- remove one heart when the lives is 3
+	elseif (lives == 3) then
+		heart3.isVisible = false
+		-- remove another heart if lives is 2
+	elseif (lives == 2) then
+		heart2.isVisible = false
+		-- remove another heart if lives is 1
+	elseif (lives == 1) then
+		heart1.isVisible = false
+		gameOver.isVisible = true
+		numericField.isVisible = false	
+	
+
+	elseif (lives == 0) then
+		heart4.isVisible = false
+		heart3.isVisible = false
+		heart2.isVisible = false
+		heart1.isVisible = false
+		lives = lives - 1
+		DecreaseLives()
+		gameOver.isVisible = true
+		numericField.isVisible = false	
+	
+	end
+end
+
+-- ask questions on a constant repeat/ create endless questions in a local functions
 local function AskQuestion()
 	-- generate 2 random numbers between a max. and a min. number
 	-- set random number 1
@@ -105,6 +136,7 @@ local function UpdateTime()
 
 		-- cancel the timer and remove the fourth heart by making it invisible
 	
+<<<<<<< HEAD
 		-- udpate the hearts
 		if (lives == 4) then
 			heart4.isVisible = true
@@ -136,6 +168,9 @@ local function UpdateTime()
 			timer.cancel( countDownTimer )
 			countDownTimer = timer.preformWIthDelay( 1000, nil, 0)
 		end
+=======
+		DecreaseLives()
+>>>>>>> 17d0f75dd73b2c880976695076eb84c47c82935f
 		-- call the function to ask a new question
 		AskQuestion()
 	end
@@ -160,11 +195,13 @@ end
 
 
 local function HideCorrect()
+	-- hide the correct if the answer is incorrect
 	correctObject.isVisible = false
 	AskQuestion()
 end
 
 local function HideIncorrect()
+	-- hide the incorrect if the answer is correct
 	incorrectObject.isVisible = false
 	AskQuestion()
 end
@@ -188,33 +225,38 @@ local function NumericFieldListener(event)
 			numberPoints = numberPoints + 1
 			pointsObject.text = ( "Points = " .. numberPoints)
 			correctSoundChannel = audio.play(correctSound)
-			timer.performWithDelay(2000, HideCorrect)			
-
+			timer.performWithDelay(2000, HideCorrect)	
+		-- if the answer is incorrect
 		else 
+			--play an incorrect sound
 			incorrectSoundChannel = audio.play(incorrectSound)
 			timer.performWithDelay(2000, HideIncorrect)
+
+			-- display incorrect text
+			incorrectObject.isVisible = true
 			
+			-- remove a life if the users answer is incorrect
+			lives = lives - 1
+			if (lives == 4) then
+				heart4.isVisible = false
+			elseif (lives == 3) then
+				heart3.isVisible = false
+			elseif (lives == 2) then
+				heart2.isVisible = false
+			elseif (lives == 1) then
+				heart1.isVisible = false
+			
+			elseif (lives == 0) then
+				heart4.isVisible = false
+				heart3.isVisible = false
+				heart2.isVisible = false
+				heart1.isVisible = false
+				gameOver.isVisible = true
+				numericTextField.isVisible = false
+			end
 		end
 		-- clear text field
 		event.target.text = ""
-	end
-end
-
-
----------------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
----------------------------------------------------------------------------------------------
-
-
-
-
-local function GameOver(event)
-	if (lives == 0) then
-		heart1.isVsible = false
-		heart2.isVisible = false
-		heart3.isvisible = false
-		heart4.isVisible = false
-		gameOver = display.newImageRect("Images/gameOver.png")
 	end
 end
 
@@ -273,7 +315,11 @@ pointsObject.text = ( "Points =" .. numberPoints)
 clockText = display.newText ( "", display.contentWidth/2, display.contentHeight *2.5/3, nil, 75 )
 clockText:setTextColor( 149/255, 89/255, 100/255 )
 
-
+-- create gameOver image and make it invisible
+gameOver = display.newImageRect("Images/gameOver.png", display.contentWidth, display.contentHeight)
+gameOver.x = display.contentWidth * 1 / 2
+gameOver.y = display.contentHeight * 1 / 2
+gameOver.isVisible = false
 -----------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------
