@@ -270,5 +270,3 @@ AskQuestion()
 StartTimer()
 
 DecreaseLives()
-
----cgcgcgcc
