@@ -61,3 +61,16 @@ local bkg = display.newImage("Images/bkg.png", 0, 0)
 
 	--send to back
 	bkg:toBack()
+
+
+
+-----------------------------------------------------------------------------------------
+-- FUNCTIONS
+-----------------------------------------------------------------------------------------
+
+
+-- create the first ball
+local function firstBall()
+	-- create the first ball
+	local ball1 = display.newImage("Images/super_ball.png", 0, 0)
+
