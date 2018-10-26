@@ -199,19 +199,10 @@ local function NumericFieldListener(event)
 	end
 end
 
-
-
 local function StartTimer()
 	-- create an infinate timer
 	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
 end
-
-
-
-
-
-
-
 -----------------------------------------------------------------------------------------------
 -- OBJECT CREATION
 ------------------------------------------------------------------------------------------------
@@ -279,3 +270,5 @@ AskQuestion()
 StartTimer()
 
 DecreaseLives()
+
+---cgcgcgcc
