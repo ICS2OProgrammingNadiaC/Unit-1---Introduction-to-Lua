@@ -2,8 +2,8 @@
 -- Title: Physics & Collisions
 -- Name: Nadia Coleman
 -- Course: ICS20
+-- This program displays 6 differently shaped balls that bounce off of beams in different directions
 -----------------------------------------------------------------------------------------
-
 -- Hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
