@@ -46,7 +46,7 @@ scoreText.text = ( "Score = " .. score)
 -----------------------------------------------------------------------------------------
 -- create a function that makes the mole appear at random places on the screen before 
 -- calling the Hide Function
-local function PopUp()
+function PopUp()
 
 	-- Choose the random position on the screen between 0 and the size of the screen
 	mole.x = math.random( 0, display.contentWidth )
@@ -57,12 +57,12 @@ local function PopUp()
 end
 
 -- create a function that calls the PopUp function after 3 seconds
-local function PopUpDelay()
+function PopUpDelay()
 	timer.performWithDelay( 3000, PopUp )
 end
 
 -- create a function that makes the mole invisible and then calls the PopUpDelay function
-local function Hide()
+function Hide()
 
 	-- change the mole visiblity
 	mole.isVisible = false
@@ -70,14 +70,14 @@ local function Hide()
 end
 
 -- create a function that begins the game
-local function GameStart()
+function GameStart()
 	PopUpDelay()
 end
 
 -- create a function that increments the score but only if the mole is clicked. It then
 -- displays the new score
 
-local function Whacked( event )
+function Whacked( event )
 
 	-- if the touch phase just started
 	if (event.phase == "began") then
