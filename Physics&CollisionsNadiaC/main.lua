@@ -28,12 +28,12 @@ ground.width = display.contentWidth
 physics.addBody(ground, "static", {friction=0.45, bounce=0.4})
 
 -----------------------------------------------------------------------------------------
-
+-- display the beam and set the X/Y positions
 local beam = display.newImageRect("Images/beam.png", 0, 0)
-beam.x = display.contentCenterX/5
-beam.y = display.contentCenterY*1.65
+beam.x = display.contentCenterX / 5
+beam.y = display.contentCenterY * 1.65
 
--- set the beam to be half the ipad height and 1/10 th of the ipad height
+-- set the beam to be half the ipad height and 1/10th of the ipad height
 beam.width = display.contentCenterX / 2
 beam.height = display.contentCenterY * 1 / 10
 
@@ -44,9 +44,49 @@ beam:rotate(45)
 beam:toBack()
 
 -- add to physics
-physics.addBody(beam, "static", {friction=0.45, bounce=0.35})
+physics.addBody(beam, "static", {friction=0.6, bounce=0.35})
+-----------------------------------------------------------------------------------------
+
+-- display the beam and set the X/Y positions
+local beam2 = display.newImageRect("Images/beam.png", 0, 0)
+-- move the second beam over
+beam2.x = display.contentCenterX / 5/20
+beam2.y = display.contentCenterY * 1.65
+
+-- set the beam to be half the ipad height and 1/10th of the ipad height
+beam2.width = display.contentCenterX / 1
+beam2.height = display.contentCenterY * 1 / 10
+
+beam2:rotate(80)
+
+-- send it to the back layer
+beam2:toBack()
+
+-- add to physics
+physics.addBody(beam2, "static", {friction=0.6, bounce=1.5})
+-----------------------------------------------------------------------------------------
 
 
+
+-- display the beam and set the X/Y positions
+local beam3 = display.newImageRect("Images/beam.png", 0, 0)
+-- move the second beam over
+beam3.x = display.contentCenterX / 0.5
+beam3.y = display.contentCenterY * 1.65
+
+-- set the beams height and width
+beam3.width = display.contentCenterX / 1
+beam3.height = display.contentCenterY * 1 / 10
+
+beam3:rotate(90)
+
+-- send it to the back layer
+beam3:toBack()
+
+-- add to physics
+physics.addBody(beam3, "static", {friction=0.6, bounce=0.7})
+
+-----------------------------------------------------------------------------------------
 
 -- create BKG
 local bkg = display.newImage("Images/bkg.png", 0, 0)
@@ -61,3 +101,105 @@ local bkg = display.newImage("Images/bkg.png", 0, 0)
 
 	--send to back
 	bkg:toBack()
+
+-----------------------------------------------------------------------------------------
+-- FUNCTIONS
+-----------------------------------------------------------------------------------------
+
+-- create first ball
+local function firstBall()	
+	-- creation of the fisrt ball
+	local ball1 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball1, {density=1.0, friction=0.5, bounce=0.3, radius=25})
+end
+-----------------------------------------------------------------------------------------
+
+-- create second ball
+local function secondBall()	
+	-- creation of the fisrt ball
+	local ball2 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball2, {density=1.0, friction=0.2, bounce=1.0, radius=25})
+
+	-- scale the ball to be half it's original size
+	ball2:scale(2.0, 2.0)
+end
+
+---------------------------------------------------------------------
+
+-- create third ball
+local function thirdBall()	
+	-- creation of the fisrt ball
+	local ball3 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball3, {density=1.0, friction=0.3, bounce=1.0, radius=25})
+
+	-- scale the ball to be half of its size it's original size
+	ball3:scale(2.0, 2.0)
+end
+
+---------------------------------------------------------------------
+
+
+-- create second ball
+local function fourthBall()	
+	-- creation of the fisrt ball
+	local ball4 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball4, {density=1.4, friction=0.3, bounce=1.0, radius=25})
+
+end
+
+---------------------------------------------------------------------
+
+
+-- create second ball
+local function fifthBall()	
+	-- creation of the fisrt ball
+	local ball5 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball5, {density=1.0, friction=0.5, bounce=0.3, radius=25})
+
+end
+
+---------------------------------------------------------------------
+
+
+-- create second ball
+local function sixthBall()	
+	-- creation of the fisrt ball
+	local ball6 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- add to physics
+	physics.addBody(ball6, {density=1.0, friction=0.5, bounce=0.3, radius=25})
+
+end
+
+
+---------------------------------------------------------------------
+-- SOUNDS
+---------------------------------------------------------------------
+
+-- electronic sound
+local backgroundSound = audio.loadSound( "Sounds/background.mp3")
+local backgroundSoundChannel
+
+backgroundSoundChannel = audio.play(backgroundSound)
+
+
+---------------------------------------------------------------------
+-- TIMER DELAYS
+---------------------------------------------------------------------
+-- call each function after a period of time
+timer.performWithDelay( 0, firstBall)
+timer.performWithDelay( 500, secondBall)
+timer.performWithDelay( 700, thirdBall)
+timer.performWithDelay( 800, fourthBall)
+timer.performWithDelay( 900, fifthBall)
+timer.performWithDelay( 1000, sixthBall)
