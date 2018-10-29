@@ -75,7 +75,7 @@ beam3.x = display.contentCenterX / 0.5
 beam3.y = display.contentCenterY * 1.65
 
 -- set the beams height and width
-beam3.width = display.contentCenterX / 1
+beam3.width = display.contentWidth
 beam3.height = display.contentCenterY * 1 / 10
 
 beam3:rotate(90)
@@ -102,23 +102,11 @@ local bkg = display.newImage("Images/bkg.png", 0, 0)
 	--send to back
 	bkg:toBack()
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b8a2fe6a0a63b996bd3615007ba06a53adfc915a
 -----------------------------------------------------------------------------------------
 -- FUNCTIONS
 -----------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
 
--- create the first ball
-local function firstBall()
-	-- create the first ball
-	local ball1 = display.newImage("Images/super_ball.png", 0, 0)
-
-=======
 -- create first ball
 local function firstBall()	
 	-- creation of the fisrt ball
@@ -135,7 +123,7 @@ local function secondBall()
 	local ball2 = display.newImage("Images/super_ball.png", 0, 0)
 
 	-- add to physics
-	physics.addBody(ball2, {density=1.0, friction=0.2, bounce=1.0, radius=25})
+	physics.addBody(ball2, {density=1.0, friction=0.2, bounce=1.0, radius=50})
 
 	-- scale the ball to be half it's original size
 	ball2:scale(2.0, 2.0)
@@ -152,7 +140,7 @@ local function thirdBall()
 	physics.addBody(ball3, {density=1.0, friction=0.3, bounce=1.0, radius=25})
 
 	-- scale the ball to be half of its size it's original size
-	ball3:scale(2.0, 2.0)
+	ball3:scale(1.0, 1.0)
 end
 
 ---------------------------------------------------------------------
@@ -191,6 +179,8 @@ local function sixthBall()
 
 	-- add to physics
 	physics.addBody(ball6, {density=1.0, friction=0.5, bounce=0.3, radius=25})
+	-- scale the ball to be half of its size it's original size
+	ball6:scale(1.0, 1.0)
 
 end
 
@@ -216,4 +206,3 @@ timer.performWithDelay( 700, thirdBall)
 timer.performWithDelay( 800, fourthBall)
 timer.performWithDelay( 900, fifthBall)
 timer.performWithDelay( 1000, sixthBall)
->>>>>>> b8a2fe6a0a63b996bd3615007ba06a53adfc915a

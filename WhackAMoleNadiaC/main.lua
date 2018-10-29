@@ -51,13 +51,13 @@ function PopUp()
 	mole.x = math.random( 0, display.contentWidth )
 	mole.y = math.random( 0, display.contentHeight )
 	mole.isVisible = true
-	timer.performWithDelay( 2000, Hide)
+	timer.performWithDelay( 1000, Hide)
 
 end
 
 -- create a function that calls the PopUp function after 3 seconds
 function PopUpDelay()
-	timer.performWithDelay( 500, PopUp )
+	timer.performWithDelay( 2000, PopUp )
 end
 
 function Hide()
@@ -72,6 +72,7 @@ end
 -- create a function that begins the game
 function GameStart()
 	PopUpDelay()
+
 end
 
 -- create a function that increments the score but only if the mole is clicked. It then
@@ -84,7 +85,7 @@ function Whacked( event )
 		whackSoundChannel = audio.play(whackSound)
 		numberOfPoints =  numberOfPoints + 1
 		score.text = " Score = " .. numberOfPoints
-		PopUp()
+		
 	end
 end
 
