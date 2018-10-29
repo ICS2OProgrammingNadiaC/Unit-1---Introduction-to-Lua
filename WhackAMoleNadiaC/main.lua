@@ -1,4 +1,4 @@
------------------------------------------------------------------------------------------
+ -----------------------------------------------------------------------------------------
 -- Title: Whack A Mole
 -- Name: Nadia Coleman
 -- Course: ICS20
@@ -10,16 +10,8 @@
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
--- create the background
-local bkg = display.newRect( 0, 0, display.contentWidth, display.contentHeight )
-	-- set background colour
-	bkg.color = 100/255, 200/255, 90/255
-	-- set position
-	bkg.anchorX = 0
-	bkg.anchorY = 0
-	bkg.x = 0
-	bkg.y = 0
-
+-- Sets the background colour
+display.setDefault("background", 122/255, 27/255, 200/255)
 
 -- creating the mole
 local mole = display.newImage( "Images/mole.png" , 0, 0 )
@@ -27,24 +19,31 @@ local mole = display.newImage( "Images/mole.png" , 0, 0 )
 	-- set the moles position
 	mole.x = display.contentCenterX
 	mole.y = display.contentCenterY
-	mole:scale(3.0, 3.0)
+	mole:scale(1/3, 1/3)
 
 	-- set the mole to be transparent
-	mole.alpha = 0
+	mole.isVisible = false
+
+local whackSound
 
 -----------------------------------------------------------------------------------------
--- OBJECT CREATION
+-- SCORE
 -----------------------------------------------------------------------------------------
-local score = 0
--- display the users score
-scoreText = display.newText( "" , 120, 100, nil, 50 )
-scoreText:setTextColor(120/255, 70/255, 3/255)
-scoreText.text = ( "Score = " .. score)
+
+local score
+local numberOfPoints = 0
+
+-- display the score text
+score = display.newText( "Score = " .. numberOfPoints, display.contentWidth/2, display.contentHeight/2, nil, 80)
+score:setTextColor(100/255, 2/255, 4/255)
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 -- create a function that makes the mole appear at random places on the screen before 
+
+-- create a function that makes the mole invisible and then calls the PopUpDelay function
+
 -- calling the Hide Function
 function PopUp()
 
@@ -52,22 +51,23 @@ function PopUp()
 	mole.x = math.random( 0, display.contentWidth )
 	mole.y = math.random( 0, display.contentHeight )
 	mole.isVisible = true
-	timer.performWithDelay( 500, HideFunction)
+	timer.performWithDelay( 2000, Hide)
 
 end
 
 -- create a function that calls the PopUp function after 3 seconds
 function PopUpDelay()
-	timer.performWithDelay( 3000, PopUp )
+	timer.performWithDelay( 500, PopUp )
 end
 
--- create a function that makes the mole invisible and then calls the PopUpDelay function
 function Hide()
 
 	-- change the mole visiblity
 	mole.isVisible = false
 	PopUpDelay()
 end
+
+
 
 -- create a function that begins the game
 function GameStart()
@@ -81,8 +81,10 @@ function Whacked( event )
 
 	-- if the touch phase just started
 	if (event.phase == "began") then
-		score = score + 1
-		scoreText.isVisible = true
+		whackSoundChannel = audio.play(whackSound)
+		numberOfPoints =  numberOfPoints + 1
+		score.text = " Score = " .. numberOfPoints
+		PopUp()
 	end
 end
 
@@ -97,3 +99,4 @@ mole:addEventListener( "touch", Whacked )
 -- START GAME
 -----------------------------------------------------------------------------------------
 GameStart()
+
