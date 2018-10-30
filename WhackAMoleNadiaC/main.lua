@@ -6,7 +6,6 @@
 -- their score increases by 1.
 -----------------------------------------------------------------------------------------
 
-
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
@@ -24,7 +23,17 @@ local mole = display.newImage( "Images/mole.png" , 0, 0 )
 	-- set the mole to be transparent
 	mole.isVisible = false
 
-local whackSound
+
+---------------------------------------------------------------------
+-- SOUNDS
+---------------------------------------------------------------------
+-- whack sound
+
+local whackSound = audio.loadSound( "Sounds/whack.mp3" )
+local whackSoundChannel
+---------------------------------------------------------------------
+
+
 
 -----------------------------------------------------------------------------------------
 -- SCORE
@@ -82,7 +91,9 @@ function Whacked( event )
 
 	-- if the touch phase just started
 	if (event.phase == "began") then
+
 		whackSoundChannel = audio.play(whackSound)
+
 		numberOfPoints =  numberOfPoints + 1
 		score.text = " Score = " .. numberOfPoints
 		
@@ -101,3 +112,6 @@ mole:addEventListener( "touch", Whacked )
 -----------------------------------------------------------------------------------------
 GameStart()
 
+
+
+---------------------------------------------------------------------
