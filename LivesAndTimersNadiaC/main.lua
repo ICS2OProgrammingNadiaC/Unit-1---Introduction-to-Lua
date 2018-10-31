@@ -122,7 +122,9 @@ local function DecreaseLives()
 
 		-- remove another heart if lives is 1
 	elseif (lives == 1) then
-
+		heart4.isVisible = false
+		heart3.isVisible = false
+		heart2.isVisible = false
 		heart1.isVisible = false
 		gameOver.isVisible = true
 		numericField.isVisible = false	
@@ -143,14 +145,12 @@ local function UpdateTime()
 		lives = lives - 1
 		-- if there are no lives left, play a lose sound and display a lose image.
 		incorrectSoundChannel = audio.play(incorrectSound)
-		gameOver.isVisible = true
 		numericField.isVisible = false
 		-- cancel the timer and remove the fourth heart by making it invisible
-		-- update the hearts
-		DecreaseLives()
 		-- call the function to ask a new question
 		AskQuestion()
-
+		-- decrease lives
+		DecreaseLives()
 	end
 end
 
@@ -178,6 +178,10 @@ local function NumericFieldListener(event)
 			pointsObject.text = ( "Points = " .. numberPoints)
 			secondsLeft = totalSeconds
 			UpdateTime()
+			if ( points == 5) then
+				youWin.isVisible = true
+				congratsText.isVisible = true
+			end
 
 		
 			-- if the answer is incorrect
@@ -198,6 +202,8 @@ local function NumericFieldListener(event)
 		event.target.text = ""
 	end
 end
+
+
 
 local function StartTimer()
 	-- create an infinate timer
@@ -260,6 +266,15 @@ gameOver = display.newImageRect("Images/gameOver.png", display.contentWidth, dis
 gameOver.x = display.contentWidth * 1 / 2
 gameOver.y = display.contentHeight * 1 / 2
 gameOver.isVisible = false
+
+-- create youWin Image and make it invisible
+youWin = display.newImageRect("Images/youWin.png", display.contentWidth, display.contentHeight)
+youWin.x = display.contentWidth * 1 / 2
+youWin.y = display.contentHeight * 1 / 2
+youWin.isVisible = false
+
+-- create a you win text
+congratsText = display.newText ("Congrats! ", display.contentWidth/2, display.contentHeight *2, nil, 75)
 -----------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------
@@ -268,5 +283,3 @@ gameOver.isVisible = false
 AskQuestion()
 
 StartTimer()
-
-DecreaseLives()

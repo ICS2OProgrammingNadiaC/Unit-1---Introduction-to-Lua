@@ -37,9 +37,10 @@ textObject:setTextColor (1, 1, 0)
 textObject.isVisible = false
 
 local checkmark = display.newImage("Images/checkmark.png", 100, 100)
-checkmark.x = display.contentWidth/2
-checkmark.y = display.contentHeight/2
+checkmark.x = display.contentWidth / 3.5
+checkmark.y = display.contentHeight / 2
 checkmark.isVisible = false
+checkmark:scale(0.1, 0.1)
 
 -- Function: BlueButtonListener
 -- Input: touch listener
