@@ -36,6 +36,11 @@ textObject.y = display.contentHeight/3
 textObject:setTextColor (1, 1, 0)
 textObject.isVisible = false
 
+local checkmark = display.newImage("Images/checkmark.png", 100, 100)
+checkmark.x = display.contentWidth/2
+checkmark.y = display.contentHeight/2
+checkmark.isVisible = false
+
 -- Function: BlueButtonListener
 -- Input: touch listener
 -- Output: none 
@@ -46,6 +51,7 @@ local function BlueButtonListener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
+		checkmark.isVisible = true
 		bellsSoundChannel = audio.play(bellSound)
 	end
 
@@ -53,6 +59,7 @@ local function BlueButtonListener(touch)
 		blueButton.isVisible = true
 		redButton.isVisible = false
 		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 end
 
@@ -65,12 +72,14 @@ local function RedButtonListener(touch)
 		redButton.isVisible = true
 		blueButton.isVisible = false
 		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 
 	if (touch.phase == "ended") then
 		redButton.isVisible = false
 		blueButton.isVisible = true
 		textObject.isVisible = false
+		checkmark.isVisible = false
 	end
 end
 

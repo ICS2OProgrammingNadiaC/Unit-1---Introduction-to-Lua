@@ -28,13 +28,14 @@ ground.width = display.contentWidth
 physics.addBody(ground, "static", {friction=0.45, bounce=0.4})
 
 -----------------------------------------------------------------------------------------
+
 -- display the beam and set the X/Y positions
 local beam = display.newImageRect("Images/beam.png", 0, 0)
 beam.x = display.contentCenterX / 5
 beam.y = display.contentCenterY * 1.65
 
 -- set the beam to be half the ipad height and 1/10th of the ipad height
-beam.width = display.contentCenterX / 2
+beam.width = display.contentCenterX / 1
 beam.height = display.contentCenterY * 1 / 10
 
 -- rotate the beam so its on an angle
@@ -47,44 +48,27 @@ beam:toBack()
 physics.addBody(beam, "static", {friction=0.6, bounce=0.35})
 -----------------------------------------------------------------------------------------
 
+
+
 -- display the beam and set the X/Y positions
 local beam2 = display.newImageRect("Images/beam.png", 0, 0)
 -- move the second beam over
-beam2.x = display.contentCenterX / 5/20
+beam2.x = display.contentCenterX / 0.5
 beam2.y = display.contentCenterY * 1.65
 
--- set the beam to be half the ipad height and 1/10th of the ipad height
-beam2.width = display.contentCenterX / 1
+-- set the beams height and width
+beam2.width = display.contentWidth
 beam2.height = display.contentCenterY * 1 / 10
 
-beam2:rotate(80)
+beam2:rotate(90)
 
 -- send it to the back layer
 beam2:toBack()
 
 -- add to physics
-physics.addBody(beam2, "static", {friction=0.6, bounce=1.5})
+physics.addBody(beam2, "static", {friction=0.6, bounce=0.7})
+
 -----------------------------------------------------------------------------------------
-
-
-
--- display the beam and set the X/Y positions
-local beam3 = display.newImageRect("Images/beam.png", 0, 0)
--- move the second beam over
-beam3.x = display.contentCenterX / 0.5
-beam3.y = display.contentCenterY * 1.65
-
--- set the beams height and width
-beam3.width = display.contentWidth
-beam3.height = display.contentCenterY * 1 / 10
-
-beam3:rotate(90)
-
--- send it to the back layer
-beam3:toBack()
-
--- add to physics
-physics.addBody(beam3, "static", {friction=0.6, bounce=0.7})
 
 -----------------------------------------------------------------------------------------
 
