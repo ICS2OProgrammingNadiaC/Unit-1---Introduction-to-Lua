@@ -39,7 +39,7 @@ local clockText
 
 local countDownTimer
 
-local lives = 5
+local lives = 4
 
 local heart1
 local heart2
@@ -108,20 +108,33 @@ local function DecreaseLives()
 	-- remove a heart every time the timer runs out
 	if (lives == 4) then
 
-		heart4.isVisible = false
+		heart4.isVisible = true
+		heart3.isVisible = true
+		heart2.isVisible = true
+		heart1.isVisible = true
 
 		-- remove one heart when the lives is 3
 	elseif (lives == 3) then
-
-		heart3.isVisible = false
+		heart4.isVisible = false
+		heart3.isVisible = true
+		heart2.isVisible = true
+		heart1.isVisible = true
 
 		-- remove another heart if lives is 2
 	elseif (lives == 2) then
-
-		heart2.isVisible = false
+		heart4.isVisible = false
+		heart3.isVisible = false
+		heart2.isVisible = true
+		heart1.isVisible = true
 
 		-- remove another heart if lives is 1
 	elseif (lives == 1) then
+		heart4.isVisible = false
+		heart3.isVisible = false
+		heart2.isVisible = false
+		heart1.isVisible = true
+	elseif (lives == 0) then
+
 		heart4.isVisible = false
 		heart3.isVisible = false
 		heart2.isVisible = false
