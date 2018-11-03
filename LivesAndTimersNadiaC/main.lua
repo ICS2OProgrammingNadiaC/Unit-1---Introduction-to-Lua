@@ -190,7 +190,7 @@ local function NumericFieldListener(event)
 			numberPoints = numberPoints + 1
 			pointsObject.text = ( "Points = " .. numberPoints)
 			secondsLeft = totalSeconds
-			UpdateTime()
+			
 
 
 		else 
@@ -203,7 +203,7 @@ local function NumericFieldListener(event)
 			-- remove a life if the users answer is incorrect
 			DecreaseLives()
 			secondsLeft = totalSeconds
-			UpdateTime()
+		
 			
 		end
 		-- clear text field
