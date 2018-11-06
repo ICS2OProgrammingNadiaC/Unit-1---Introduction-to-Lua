@@ -204,7 +204,7 @@ local function NumericFieldListener(event)
 			DecreaseLives()
 			secondsLeft = totalSeconds
 		
-			
+		
 		end
 		-- clear text field
 		event.target.text = ""
